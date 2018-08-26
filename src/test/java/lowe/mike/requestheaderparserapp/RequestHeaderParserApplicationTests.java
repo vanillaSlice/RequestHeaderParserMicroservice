@@ -42,7 +42,7 @@ public class RequestHeaderParserApplicationTests {
   }
 
   @Test
-  public void contextLoads() throws Exception {
+  public void home_returnsClientDetails() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(content().json("{" +
