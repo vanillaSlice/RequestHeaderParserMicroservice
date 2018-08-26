@@ -3,7 +3,7 @@
 A simple request header parser microservice built with Spring Boot. A deployed version can be viewed
 [here](https://sliceheaderparser.herokuapp.com/).
 
-### Example response:
+## Example response:
 ```
 {
   ipaddress: "251.1.41.24",
@@ -17,3 +17,8 @@ A simple request header parser microservice built with Spring Boot. A deployed v
 gradle bootRun
 ```
 Then point your browser to [localhost:8080](http://localhost:8080).
+
+## Running Tests
+```
+gradle test
+```

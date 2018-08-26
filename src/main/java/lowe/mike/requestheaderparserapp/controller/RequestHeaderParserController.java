@@ -7,18 +7,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Application controller.
+ *
+ * @author Mike Lowe
+ */
 @RestController
 public class RequestHeaderParserController {
 
-    private final RequestHeaderParserService requestHeaderParserService;
+  private final RequestHeaderParserService requestHeaderParserService;
 
-    public RequestHeaderParserController(RequestHeaderParserService requestHeaderParserService) {
-        this.requestHeaderParserService = requestHeaderParserService;
-    }
+  /**
+   * Creates a new {@code RequestHeaderParserController}.
+   *
+   * @param requestHeaderParserService the {@link RequestHeaderParserService}
+   * @throws NullPointerException if {@code requestHeaderParserService} is {@code null}
+   */
+  public RequestHeaderParserController(final RequestHeaderParserService requestHeaderParserService) {
+    this.requestHeaderParserService =
+        requireNonNull(requestHeaderParserService, "request header parser service cannot be null");
+  }
 
-    @RequestMapping("/")
-    public ClientDetails home(HttpServletRequest request) {
-        return requestHeaderParserService.parse(request);
-    }
+  @RequestMapping("/")
+  public ClientDetails home(final HttpServletRequest request) {
+    return requestHeaderParserService.parse(request);
+  }
 
 }
