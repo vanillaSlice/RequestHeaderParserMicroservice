@@ -1,5 +1,12 @@
 package lowe.mike.requestheaderparserapp;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import lowe.mike.requestheaderparserapp.model.ClientDetails;
 import lowe.mike.requestheaderparserapp.service.RequestHeaderParserService;
 import org.junit.Before;
@@ -13,18 +20,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+/**
+ * {@link RequestHeaderParserApplication} tests.
+ *
+ * @author Mike Lowe
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @AutoConfigureMockMvc
 @ContextConfiguration
-public class RequestHeaderParserApplicationTests {
+public class RequestHeaderParserApplicationTest {
 
   @Autowired
   private MockMvc mvc;
@@ -45,11 +50,11 @@ public class RequestHeaderParserApplicationTests {
   public void home_returnsClientDetails() throws Exception {
     mvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(content().json("{" +
-            "\"ipAddress\":\"" + IP_ADDRESS + "\"," +
-            "\"language\":\"" + LANGUAGE + "\"," +
-            "\"software\":\"" + SOFTWARE + "\"" +
-            "}"));
+        .andExpect(content().json("{"
+            + "\"ipAddress\":\"" + IP_ADDRESS + "\","
+            + "\"language\":\"" + LANGUAGE + "\","
+            + "\"software\":\"" + SOFTWARE + "\""
+            + "}"));
   }
 
 }

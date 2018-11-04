@@ -1,36 +1,35 @@
 package lowe.mike.requestheaderparserapp.service;
 
-import lowe.mike.requestheaderparserapp.model.ClientDetails;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import lowe.mike.requestheaderparserapp.model.ClientDetails;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+/**
+ * {@link DefaultHeaderParserService} tests.
+ *
+ * @author Mike Lowe
+ */
 public class DefaultHeaderParserServiceTest {
 
   private static final String IP_ADDRESS = "127.0.0.1";
   private static final String LOCALE = "en";
   private static final String USER_AGENT = "Macintosh; Intel Mac OS X 10_13_4";
 
-  @Rule
-  public ExpectedException expectedException = ExpectedException.none();
-
   private final RequestHeaderParserService service = new DefaultHeaderParserService();
 
-  @Mock
-  private HttpServletRequest request;
+  private final HttpServletRequest request = mock(HttpServletRequest.class);
 
-  @Before
+  /**
+   * Test setup.
+   */
+  @BeforeEach
   public void setUp() {
     when(request.getRemoteAddr()).thenReturn(IP_ADDRESS);
     when(request.getLocale()).thenReturn(new Locale(LOCALE));
@@ -39,16 +38,15 @@ public class DefaultHeaderParserServiceTest {
 
   @Test
   public void parse_nullRequest_throwsNullPointerException() {
-    expectedException.expect(NullPointerException.class);
-    expectedException.expectMessage("request cannot be null");
-
-    service.parse(null);
+    NullPointerException exception = assertThrows(NullPointerException.class,
+        () -> service.parse(null));
+    assertEquals("request is null", exception.getMessage());
   }
 
   @Test
   public void parse_validRequest_returnsClientDetails() {
-    final ClientDetails actualResponse = service.parse(request);
-    final ClientDetails expectedResponse = new ClientDetails(IP_ADDRESS, LOCALE, USER_AGENT);
+    ClientDetails actualResponse = service.parse(request);
+    ClientDetails expectedResponse = new ClientDetails(IP_ADDRESS, LOCALE, USER_AGENT);
 
     assertEquals(expectedResponse, actualResponse);
   }

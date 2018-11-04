@@ -1,13 +1,12 @@
 package lowe.mike.requestheaderparserapp.controller;
 
+import static java.util.Objects.requireNonNull;
+
+import javax.servlet.http.HttpServletRequest;
 import lowe.mike.requestheaderparserapp.model.ClientDetails;
 import lowe.mike.requestheaderparserapp.service.RequestHeaderParserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Application controller.
@@ -25,13 +24,13 @@ public class RequestHeaderParserController {
    * @param requestHeaderParserService the {@link RequestHeaderParserService}
    * @throws NullPointerException if {@code requestHeaderParserService} is {@code null}
    */
-  public RequestHeaderParserController(final RequestHeaderParserService requestHeaderParserService) {
+  public RequestHeaderParserController(RequestHeaderParserService requestHeaderParserService) {
     this.requestHeaderParserService =
-        requireNonNull(requestHeaderParserService, "request header parser service cannot be null");
+        requireNonNull(requestHeaderParserService, "request header parser service is null");
   }
 
   @RequestMapping("/")
-  public ClientDetails home(final HttpServletRequest request) {
+  public ClientDetails home(HttpServletRequest request) {
     return requestHeaderParserService.parse(request);
   }
 

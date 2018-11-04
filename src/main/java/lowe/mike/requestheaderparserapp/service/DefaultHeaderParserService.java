@@ -1,26 +1,25 @@
 package lowe.mike.requestheaderparserapp.service;
 
-import lowe.mike.requestheaderparserapp.model.ClientDetails;
-
-import javax.servlet.http.HttpServletRequest;
-
 import static java.util.Objects.requireNonNull;
 
+import javax.servlet.http.HttpServletRequest;
+import lowe.mike.requestheaderparserapp.model.ClientDetails;
+
 /**
- * Default implementation of {@link RequestHeaderParserService}
- * extract details from a {@link HttpServletRequest}.
+ * Default implementation of {@link RequestHeaderParserService} extract details from a {@link
+ * HttpServletRequest}.
  *
  * @author Mike Lowe
  */
 public class DefaultHeaderParserService implements RequestHeaderParserService {
 
   @Override
-  public ClientDetails parse(final HttpServletRequest request) {
-    requireNonNull(request, "request cannot be null");
+  public ClientDetails parse(HttpServletRequest request) {
+    requireNonNull(request, "request is null");
 
-    final String ipAddress = request.getRemoteAddr();
-    final String language = request.getLocale().toLanguageTag();
-    final String software = request.getHeader("User-Agent");
+    String ipAddress = request.getRemoteAddr();
+    String language = request.getLocale().toLanguageTag();
+    String software = request.getHeader("User-Agent");
 
     return new ClientDetails(ipAddress, language, software);
   }
