@@ -1,38 +1,38 @@
 package lowe.mike.requestheaderparserapp;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import lowe.mike.requestheaderparserapp.model.ClientDetails;
 import lowe.mike.requestheaderparserapp.service.RequestHeaderParserService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * {@link RequestHeaderParserApplication} tests.
  *
  * @author Mike Lowe
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@AutoConfigureMockMvc
-@ContextConfiguration
+@ExtendWith(SpringExtension.class)
 public class RequestHeaderParserApplicationTest {
 
   @Autowired
-  private MockMvc mvc;
+  private Environment environment;
+
+  @Autowired
+  private TestRestTemplate template;
 
   @MockBean
   private RequestHeaderParserService service;
@@ -41,20 +41,20 @@ public class RequestHeaderParserApplicationTest {
   private static final String LANGUAGE = "en";
   private static final String SOFTWARE = "Macintosh; Intel Mac OS X 10_13_4";
 
-  @Before
+  @BeforeEach
   public void setUp() {
     when(service.parse(any())).thenReturn(new ClientDetails(IP_ADDRESS, LANGUAGE, SOFTWARE));
   }
 
   @Test
-  public void home_returnsClientDetails() throws Exception {
-    mvc.perform(get("/"))
-        .andExpect(status().isOk())
-        .andExpect(content().json("{"
-            + "\"ipAddress\":\"" + IP_ADDRESS + "\","
-            + "\"language\":\"" + LANGUAGE + "\","
-            + "\"software\":\"" + SOFTWARE + "\""
-            + "}"));
+  public void home_returnsClientDetails() {
+    ResponseEntity<String> response = template.getForEntity("/", String.class);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals("{"
+        + "\"ipAddress\":\"" + IP_ADDRESS + "\","
+        + "\"language\":\"" + LANGUAGE + "\","
+        + "\"software\":\"" + SOFTWARE + "\""
+        + "}", response.getBody());
   }
 
 }
