@@ -2,6 +2,8 @@ package lowe.mike.requestheaderparserapp.model;
 
 import static java.util.Objects.requireNonNull;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
@@ -9,10 +11,17 @@ import java.util.Objects;
  *
  * @author Mike Lowe
  */
+@ApiModel(value = "Client Details")
 public class ClientDetails {
 
+  @ApiModelProperty(notes = "IP Address", example = "251.1.41.24")
   private final String ipAddress;
+
+  @ApiModelProperty(notes = "Language", example = "en-GB")
   private final String language;
+
+  @ApiModelProperty(notes = "Software", example = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) "
+      + "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36")
   private final String software;
 
   /**
@@ -31,9 +40,9 @@ public class ClientDetails {
   }
 
   /**
-   * Returns the ip address.
+   * Returns the IP address.
    *
-   * @return the ip address
+   * @return the IP address
    */
   public String getIpAddress() {
     return ipAddress;
