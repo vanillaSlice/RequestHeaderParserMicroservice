@@ -48,13 +48,33 @@ public class RequestHeaderParserApplicationTest {
 
   @Test
   public void home_returnsClientDetails() {
-    ResponseEntity<String> response = template.getForEntity("/", String.class);
+    ResponseEntity<String> response = template.getForEntity("/parse", String.class);
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertEquals("{"
         + "\"ipAddress\":\"" + IP_ADDRESS + "\","
         + "\"language\":\"" + LANGUAGE + "\","
         + "\"software\":\"" + SOFTWARE + "\""
         + "}", response.getBody());
+  }
+
+  @Test
+  public void swaggerUI_returnsSwaggerDocs() {
+    ResponseEntity<String> response = template.getForEntity("/swagger-ui.html", String.class);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+  }
+
+  @Test
+  public void home_redirectsToSwaggerDocs() {
+    ResponseEntity<String> response = template.getForEntity("/", String.class);
+    assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    assertEquals("/swagger-ui.html", response.getHeaders().getLocation().getPath());
+  }
+
+  @Test
+  public void notFound404_returnsErrorResponse() {
+    ResponseEntity<String> response = template.getForEntity("/not-found", String.class);
+    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    assertEquals("{\"status\":404,\"message\":\"Not Found\"}", response.getBody());
   }
 
 }

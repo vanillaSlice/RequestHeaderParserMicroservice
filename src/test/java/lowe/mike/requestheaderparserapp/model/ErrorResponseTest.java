@@ -1,0 +1,20 @@
+package lowe.mike.requestheaderparserapp.model;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Test;
+
+/**
+ * {@link ErrorResponse} tests.
+ *
+ * @author Mike Lowe
+ */
+public class ErrorResponseTest {
+
+  @Test
+  public void equalsAndHashCode() {
+    EqualsVerifier.forClass(ErrorResponse.class)
+        .usingGetClass()
+        .verify();
+  }
+
+}
