@@ -47,7 +47,7 @@ public class RequestHeaderParserApplicationTest {
   }
 
   @Test
-  public void home_returnsClientDetails() {
+  public void parse_returnsClientDetails() {
     ResponseEntity<String> response = template.getForEntity("/parse", String.class);
     assertEquals(HttpStatus.OK, response.getStatusCode());
     assertEquals("{"

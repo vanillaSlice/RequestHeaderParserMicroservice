@@ -27,7 +27,7 @@ public class ClientDetails {
   /**
    * Creates a new {@code ClientDetails} instance.
    *
-   * @param ipAddress the ip address
+   * @param ipAddress the IP address
    * @param language the language
    * @param software the software
    * @throws NullPointerException if {@code ipAddress}, {@code language} or {@code software} are
