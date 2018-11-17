@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import lowe.mike.requestheaderparserapp.model.ClientDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpHeaders;
 
 /**
  * {@link DefaultHeaderParserService} tests.
@@ -23,7 +24,6 @@ public class DefaultHeaderParserServiceTest {
   private static final String USER_AGENT = "Macintosh; Intel Mac OS X 10_13_4";
 
   private final RequestHeaderParserService service = new DefaultHeaderParserService();
-
   private final HttpServletRequest request = mock(HttpServletRequest.class);
 
   /**
@@ -33,7 +33,7 @@ public class DefaultHeaderParserServiceTest {
   public void setUp() {
     when(request.getRemoteAddr()).thenReturn(IP_ADDRESS);
     when(request.getLocale()).thenReturn(new Locale(LOCALE));
-    when(request.getHeader("User-Agent")).thenReturn(USER_AGENT);
+    when(request.getHeader(HttpHeaders.USER_AGENT)).thenReturn(USER_AGENT);
   }
 
   @Test

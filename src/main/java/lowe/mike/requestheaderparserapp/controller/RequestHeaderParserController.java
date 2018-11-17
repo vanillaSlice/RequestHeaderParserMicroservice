@@ -35,11 +35,11 @@ public class RequestHeaderParserController {
   }
 
   @ApiOperation(
-      value = "Parse request headers",
+      value = "Parses request headers",
       response = ClientDetails.class,
-      notes = "Parses request headers and returns client details")
+      notes = "Parses request headers and returns client details.")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Parsing successful", response = ClientDetails.class)
+      @ApiResponse(code = 200, message = "Returns client details", response = ClientDetails.class)
   })
   @GetMapping(value = "/parse", produces = "application/json")
   public ClientDetails parse(HttpServletRequest request) {
