@@ -20,13 +20,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * {@link RequestHeaderParserApplication} tests.
+ * {@link RequestHeaderParserApplication} integration tests.
  *
  * @author Mike Lowe
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
-public class RequestHeaderParserApplicationTest {
+public class RequestHeaderParserApplicationIntegrationTest {
 
   @Autowired
   private Environment environment;
@@ -76,5 +76,4 @@ public class RequestHeaderParserApplicationTest {
     assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     assertEquals("{\"status\":404,\"message\":\"Not Found\"}", response.getBody());
   }
-
 }

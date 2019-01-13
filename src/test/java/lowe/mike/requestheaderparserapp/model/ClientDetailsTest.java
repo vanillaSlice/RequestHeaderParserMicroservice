@@ -7,7 +7,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link ClientDetails} tests.
+ * {@link ClientDetails} unit tests.
  *
  * @author Mike Lowe
  */
@@ -44,5 +44,4 @@ public class ClientDetailsTest {
         .usingGetClass()
         .verify();
   }
-
 }

@@ -45,5 +45,4 @@ public class RequestHeaderParserController {
   public ClientDetails parse(HttpServletRequest request) {
     return requestHeaderParserService.parse(request);
   }
-
 }

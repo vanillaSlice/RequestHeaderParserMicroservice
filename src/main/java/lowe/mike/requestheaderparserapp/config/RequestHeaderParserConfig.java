@@ -17,5 +17,4 @@ public class RequestHeaderParserConfig {
   public RequestHeaderParserService requestHeaderParserService() {
     return new DefaultHeaderParserService();
   }
-
 }

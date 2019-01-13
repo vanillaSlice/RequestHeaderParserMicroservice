@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link RequestHeaderParserController} tests.
+ * {@link RequestHeaderParserController} unit tests.
  *
  * @author Mike Lowe
  */
@@ -18,5 +18,4 @@ public class RequestHeaderParserControllerTest {
         () -> new RequestHeaderParserController(null));
     assertEquals("request header parser service is null", exception.getMessage());
   }
-
 }
