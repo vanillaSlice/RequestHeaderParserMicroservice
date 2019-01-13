@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 
 /**
- * {@link DefaultHeaderParserService} tests.
+ * {@link DefaultHeaderParserService} unit tests.
  *
  * @author Mike Lowe
  */
@@ -50,5 +50,4 @@ public class DefaultHeaderParserServiceTest {
 
     assertEquals(expectedResponse, actualResponse);
   }
-
 }

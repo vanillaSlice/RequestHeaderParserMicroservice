@@ -24,5 +24,4 @@ public class DefaultHeaderParserService implements RequestHeaderParserService {
 
     return new ClientDetails(ipAddress, language, software);
   }
-
 }

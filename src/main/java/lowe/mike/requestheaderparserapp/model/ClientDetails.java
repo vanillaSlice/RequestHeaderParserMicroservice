@@ -84,5 +84,4 @@ public class ClientDetails {
   public int hashCode() {
     return Objects.hash(ipAddress, language, software);
   }
-
 }

@@ -19,5 +19,4 @@ public interface RequestHeaderParserService {
    * @throws NullPointerException if {@code request} is {@code null}
    */
   ClientDetails parse(HttpServletRequest request);
-
 }
