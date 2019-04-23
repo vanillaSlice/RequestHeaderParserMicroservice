@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/vanillaSlice/RequestHeaderParserMicroservice.svg)](LICENSE)
 
 A simple request header parser microservice built with [Spring Boot](http://spring.io/projects/spring-boot). A deployed
-version can be viewed [here](https://sliceheaderparser.herokuapp.com/).
+version can be viewed [here](https://headerparser.mikelowe.xyz/).
 
 ## Getting Started
 
